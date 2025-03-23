@@ -45,7 +45,7 @@ public class UserApiDelegateImpl implements UserApiDelegate {
 		return new User()
 				.id(id)
 				.username(username)
-				.firstName(firstName)
+				.firstName(new User.FirstName(firstName))
 				.lastName(lastName)
 				.email(email)
 				.password("XXXXXXXXXXX")

@@ -27,6 +27,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import org.jmolecules.ddd.types.Identifier;
+import org.jmolecules.ddd.types.ValueObject;
 
 /**
  * User
@@ -38,10 +40,13 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 public class User {
 
+	public record UserId(Long value) implements Identifier {}
+	public record FirstName(String value) implements ValueObject {}
+
 	@JsonProperty("id")
 	@JacksonXmlProperty(localName = "id")
 
-	private Long id;
+	private UserId id;
 
 
 	@JsonProperty("username")
@@ -53,7 +58,7 @@ public class User {
 	@JsonProperty("firstName")
 	@JacksonXmlProperty(localName = "firstName")
 
-	private String firstName;
+	private FirstName firstName;
 
 
 	@JsonProperty("lastName")
@@ -87,7 +92,7 @@ public class User {
 
 
 	public User id(Long id) {
-		this.id = id;
+		this.id = new UserId(id);
 		return this;
 	}
 
@@ -97,14 +102,14 @@ public class User {
 	 *
 	 * @return id
 	 */
-	@Schema(example = "10", description = "")
-
-
-	public Long getId() {
+	// Still works, if we either provide an example or explicitly provide an example --- great!
+//	@Schema(type = "string")
+//	@Schema(example = "10", description = "")
+	public UserId getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UserId id) {
 		this.id = id;
 	}
 
@@ -132,7 +137,7 @@ public class User {
 	}
 
 
-	public User firstName(String firstName) {
+	public User firstName(FirstName firstName) {
 		this.firstName = firstName;
 		return this;
 	}
@@ -143,14 +148,14 @@ public class User {
 	 *
 	 * @return firstName
 	 */
-	@Schema(example = "John", description = "")
+//	@Schema(example = "John", description = "")
 
 
-	public String getFirstName() {
+	public FirstName getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(FirstName firstName) {
 		this.firstName = firstName;
 	}
 
