@@ -21,6 +21,7 @@ package org.springdoc.demo.app2.model;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -41,6 +42,8 @@ import org.jmolecules.ddd.types.ValueObject;
 public class User {
 
 	public record UserId(Long value) implements Identifier {}
+	// Explicit @JsonValue works, but then I wouldn't need the custom serializer...
+//	public record UserId(@JsonValue Long value) implements Identifier {}
 	public record FirstName(String value) implements ValueObject {}
 
 	@JsonProperty("id")
